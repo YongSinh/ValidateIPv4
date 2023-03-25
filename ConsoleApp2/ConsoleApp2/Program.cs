@@ -1,0 +1,37 @@
+﻿using System;
+using System.Linq;
+using System.Net;
+
+namespace ConsoleApp2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter IP Address");
+            string ipaddress = Console.ReadLine();
+            Console.WriteLine($"{ipaddress} ==> {ValidateIPv4(ipaddress)}");
+        }
+
+        static bool ValidateIPv4(string ipaddress)
+        {
+            IPAddress ip;
+            if (String.IsNullOrWhiteSpace(ipaddress))
+            {
+                return false;
+            }
+
+            string[] splitValues = ipaddress.Split('.');
+            if (splitValues.Length != 4)
+            {
+                return false;
+            }
+
+            byte tempForParsing;
+
+            return splitValues.All(r => byte.TryParse(r, out tempForParsing));
+            
+
+        }
+    }
+}
